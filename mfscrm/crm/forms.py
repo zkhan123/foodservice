@@ -8,7 +8,8 @@ class CustomerForm(forms.ModelForm):
         model = Customer
         fields = ('customer_name', 'organization', 'role', 'bldgeroom', 'account_number', 'address', 'city', 'state', 'zipcode', 'email','website')
 
-    class ServiceForm(forms.ModelForm):
+
+class ServiceForm(forms.ModelForm):
         class Meta:
             model = Service
             fields = (

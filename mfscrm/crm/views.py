@@ -5,7 +5,10 @@ from django.shortcuts import redirect
 from .models import *
 from .forms import *
 
+
 now = timezone.now()
+
+
 def home(request):
    return render(request, 'crm/home.html',
                  {'crm': home})
