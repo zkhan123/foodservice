@@ -64,7 +64,7 @@ ROOT_URLCONF = 'mfscrm.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -89,7 +89,14 @@ DATABASES = {
     }
 }
 
-
+try:
+    from local_settings import *
+except ImportError:
+    # Update database configuration with $DATABASE_URL.
+    db_from_env = dj_database_url.config(conn_max_age=500)
+    DATABASES['default'].update(db_from_env)
+    DATABASES['default'] = dj_database_url.config()
+    pass
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -145,11 +152,3 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = '/home'
 
-try:
-    from local_settings import *
-except ImportError:
-    # Update database configuration with $DATABASE_URL.
-    db_from_env = dj_database_url.config(conn_max_age=500)
-    DATABASES['default'].update(db_from_env)
-    DATABASES['default'] = dj_database_url.config()
-    pass
