@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 from .models import *
 from .forms import *
+from django.utils import timezone
 
 
 now = timezone.now()
